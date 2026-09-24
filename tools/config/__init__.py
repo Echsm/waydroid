@@ -68,7 +68,11 @@ session_defaults = {
     "lcd_density": "0",
     "background_start": "true"
 }
-session_defaults["waydroid_user_state"] = session_defaults["xdg_data_home"] + "/waydroid"
+
+if os.environ.get('WAYDROID_USER_HOME') == None:
+    session_defaults["waydroid_user_state"] = session_defaults["xdg_data_home"] + "/waydroid"
+else:
+    session_defaults["waydroid_user_state"] = os.path.expanduser(os.environ.get('WAYDROID_USER_HOME'))
 session_defaults["waydroid_data"] = session_defaults["waydroid_user_state"] + "/data"
 if session_defaults["pulse_runtime_path"] == "None":
     session_defaults["pulse_runtime_path"] = session_defaults["xdg_runtime_dir"] + "/pulse"
